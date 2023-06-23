@@ -1,0 +1,15 @@
+@import '../../../assets/scss/variables.scss';
+
+:host {
+    display: block;
+    height: 100%;
+    width: 260px;
+    margin-left: 0;
+    background-color: #666F78;
+    color: white;
+    overflow-y: auto;
+    transition: margin-left 0.3s;
+    &.closed {
+        margin-left: -100%;
+    }
+}

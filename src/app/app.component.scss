@@ -1,0 +1,24 @@
+@import '../assets/scss/variables.scss';
+@import '../assets/scss/breakpoints.scss';
+
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+.main-wrapper {
+    margin-top: 55px;
+    display: flex;
+    height: calc(100% - 55px);
+    @include lg-screen() {
+        height: calc(100% - 70px);
+        margin-top: 70px;
+    }
+    
+}
+
+main {
+    flex-grow: 1;
+    overflow-y: auto;
+}
