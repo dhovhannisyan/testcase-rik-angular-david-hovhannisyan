@@ -1,15 +1,179 @@
 @import '../../../assets/scss/variables.scss';
 
+@import '../../../assets/scss/breakpoints.scss';
+
+
 :host {
     display: block;
     height: 100%;
-    width: 260px;
-    margin-left: 0;
+    width: 100%;
+    margin-left: -100%;
     background-color: #666F78;
     color: white;
     overflow-y: auto;
     transition: margin-left 0.3s;
-    &.closed {
-        margin-left: -100%;
+
+    @include lg-screen() {
+        width: 260px;
+        margin-left: 0;
+    }
+    @include xxl-screen() {
+        width: 270px;
+    }
+
+    &.open {
+        margin-left: 0;
     }
 }
+
+.nav-list {
+    padding: 0 20px;
+    font-size: 17px;
+    @include lg-screen() {
+        padding: 0;
+    }
+
+    .nav-item {
+        .nav-link {
+            padding: 20px 0;
+            width: 100%;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-bottom: 1px solid white;
+            font-weight: 700;
+            line-height: 24px;
+
+            svg {
+                margin-right: 10px;
+            }
+
+            span {
+                line-height: 1;
+            }
+
+            @include lg-screen() {
+                align-items: center;
+                padding: 20px;
+            }
+
+        }
+
+        button.nav-link {
+            @include lg-screen() {
+                padding-left: 50px;
+            }
+
+            .wrapper {
+                @include lg-screen() {
+                    span {
+                    text-align: left;
+                    display: block;
+                    margin: 5px 0;
+                    }
+                } 
+            }
+
+            .bank-info {
+                font-weight: 300;
+                margin-left: 20px;
+                font-size: 15px;
+            }
+
+            .carret {
+                margin-left: 10px;
+            }
+        }
+
+        ul.management-submenu {
+            display: none;
+            padding-left: 35px;
+            font-size: 13px;
+            font-weight: 300;
+
+            @include lg-screen() {
+               display: block;
+            } 
+
+            a {
+                text-decoration: underline;
+            }
+        }
+
+        // & > button {
+        //     justify-content: space-between;
+        //     @include lg-screen() {
+        //         justify-content: center;
+        //      } 
+        //     .wrapper {
+        //         @include lg-screen() {
+        //            span {
+        //             text-align: left;
+        //             display: block;
+        //             margin: 5px 0;
+        //            }
+        //         } 
+        //     }
+        //     .bank-info {
+        //         font-weight: 300;
+        //         margin-left: 20px;
+        //         font-size: 15px;
+        //     }
+        //     .carret {
+        //         margin-left: 10px;
+        //     }
+        // }
+    }
+}
+
+ul.superagent-submenu {
+    padding-top: 20px;
+    @include lg-screen() {
+        padding-top: 0;
+        // padding-left: 20px;
+    }
+    .superagent-submenu-item {
+         
+        @include lg-screen() {
+            padding: 20px;
+        }
+       
+        &.active {
+            background-color: transparent;
+            @include lg-screen() {
+                background-color: #A2A9B1;
+            }
+        }
+        a {
+            width: 100%;
+            padding-bottom: 20px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            
+            font-weight: 700;
+            svg {
+                margin-right: 10px;
+            }
+            span {
+                line-height: 1;
+            }
+        }
+       
+    }
+}
+
+.mb-only {
+    @include lg-screen() {
+        display: none;
+    }
+}
+
+
+
+
+

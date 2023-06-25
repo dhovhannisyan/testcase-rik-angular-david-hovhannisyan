@@ -19,13 +19,23 @@
 }
 
 header {
-    padding: 0 40px;
+    padding: 0 15px;
     height: 100%;
     max-width: 1600px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    user-select: none;
+
+    @include sm-screen() {
+        padding: 0 30px;
+    }
+
+    @include lg-screen() {
+        padding: 0 50px;
+    }
+
 
     .sidenav-toggle {
         @include lg-screen() {
@@ -39,6 +49,37 @@ header {
             
         }
     } 
+
+    .user-info {
+        display: none;
+        align-items: center;
+        // width: 170px;
+        font-size: 13px;
+
+        @include lg-screen() {
+            display: flex;
+        }
+
+        .avatar {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background-color: #C4C4C4;
+        }
+
+        .wrapper {
+            margin-left: 8px;
+            p {
+                text-align: left;
+                font-weight: 700;
+            }
+        }
+
+        .carret {
+            margin-left: 7px;
+        }
+
+    }
 
     
 
