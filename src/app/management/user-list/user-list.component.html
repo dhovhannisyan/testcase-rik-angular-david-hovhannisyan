@@ -1,1 +1,115 @@
-<p>user-list works!</p>
+<section class="user-list" *ngIf="data">
+    <div class="selected-users">Количество выбранных записей: {{ getSelectedUsers() }}</div>
+    <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Действия</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button aria-label="Show actions" [matMenuTriggerFor]="menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1_114)">
+                            <path d="M6 10C4.895 10 4 10.895 4 12C4 13.105 4.895 14 6 14C7.105 14 8 13.105 8 12C8 10.895 7.105 10 6 10ZM18 10C16.895 10 16 10.895 16 12C16 13.105 16.895 14 18 14C19.105 14 20 13.105 20 12C20 10.895 19.105 10 18 10ZM12 10C10.895 10 10 10.895 10 12C10 13.105 10.895 14 12 14C13.105 14 14 13.105 14 12C14 10.895 13.105 10 12 10Z" fill="#282828"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1_114">
+                                <rect width="24" height="24" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>  
+                </button>  
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <span>Действия 1</span>
+                  </button>
+                  <button mat-menu-item>
+                    <span>Действия 2</span>
+                  </button>
+                </mat-menu>              
+            </td>
+          </ng-container>
+          <!-- Login -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox #selectTogle class="example-margin" (change)="selectUnselectAll(selectTogle.checked)">
+                    <span class="login">Логин</span>
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-checkbox class="example-margin" [(ngModel)]="element.is_selected">{{element.name}}</mat-checkbox>
+            </td>
+          </ng-container>
+          <!-- Email -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>E-mail</th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+          <!-- Phone -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>Телефон</th>
+            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+          </ng-container>
+
+          <!-- Role -->
+          <ng-container matColumnDef="is_admin">
+            <th mat-header-cell *matHeaderCellDef>Роли</th>
+            <td mat-cell *matCellDef="let element"> 
+                {{ element.is_admin ? 'Администратор' : 'Пользователь' }}
+            </td>
+          </ng-container>
+          <!-- Editing Date -->
+          <ng-container matColumnDef="update_at">
+            <th mat-header-cell *matHeaderCellDef>Дата изменения</th>
+            <td mat-cell *matCellDef="let element"> {{element.update_at | date:'dd.MM.YYYY' }} </td>
+          </ng-container>
+          <!-- Creating Date -->
+          <ng-container matColumnDef="create_at">
+            <th mat-header-cell *matHeaderCellDef>Дата создания</th>
+            <td mat-cell *matCellDef="let element"> {{element.create_at | date:'dd.MM.YYYY' }} </td>
+          </ng-container>
+           <!-- Status -->
+           <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Статус</th>
+            <td mat-cell *matCellDef="let element"> 
+                <div class="status-active" *ngIf="element.status === 'ACTIVE'">Активен</div>
+                <div class="status-inactive" *ngIf="element.status === 'INACTIVE'">Заблокирован</div>
+            </td>
+          </ng-container>
+          <!-- Has EP -->
+          <ng-container matColumnDef="is_ecp">
+            <th mat-header-cell *matHeaderCellDef>Наличие ЭП</th>
+            <td mat-cell *matCellDef="let element">
+                <svg class="has-ep-icon" *ngIf="element.is_ecp" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1_230)">
+                    <path d="M12 0C5.38293 0 0 5.38293 0 12C0 18.6171 5.38293 24 12 24C18.6171 24 24 18.6171 24 12C24 5.38293 18.6171 0 12 0Z" fill="#25B553"/>
+                    <path d="M18.082 9.45703L11.582 15.9569C11.387 16.1519 11.131 16.2501 10.875 16.2501C10.619 16.2501 10.363 16.1519 10.168 15.9569L6.91809 12.707C6.52698 12.316 6.52698 11.684 6.91809 11.293C7.30902 10.9019 7.94092 10.9019 8.33203 11.293L10.875 13.836L16.6681 8.04309C17.059 7.65198 17.6909 7.65198 18.082 8.04309C18.473 8.43402 18.473 9.06592 18.082 9.45703Z" fill="#FAFAFA"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1_230">
+                    <rect width="24" height="24" fill="white"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+                <svg class="has-ep-icon"  *ngIf="!element.is_ecp" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1_246)">
+                    <path d="M12 0C5.38293 0 0 5.38293 0 12C0 18.6171 5.38293 24 12 24C18.6171 24 24 18.6171 24 12C24 5.38293 18.6171 0 12 0Z" fill="#FF001F"/>
+                    <path d="M16.4191 15.0049C16.81 15.396 16.81 16.0279 16.4191 16.4191C16.224 16.6141 15.9681 16.712 15.7119 16.712C15.4559 16.712 15.1999 16.6141 15.0049 16.4191L12 13.4139L8.99504 16.4191C8.80003 16.6141 8.54405 16.712 8.28807 16.712C8.03191 16.712 7.77592 16.6141 7.58092 16.4191C7.18999 16.0279 7.18999 15.396 7.58092 15.0049L10.586 12L7.58092 8.99504C7.18999 8.60393 7.18999 7.97203 7.58092 7.58092C7.97203 7.18999 8.60393 7.18999 8.99504 7.58092L12 10.586L15.0049 7.58092C15.396 7.18999 16.0279 7.18999 16.4191 7.58092C16.81 7.97203 16.81 8.60393 16.4191 8.99504L13.4139 12L16.4191 15.0049Z" fill="#FAFAFA"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1_246">
+                    <rect width="24" height="24" fill="white"/>
+                    </clipPath>
+                    </defs>
+                </svg>
+             </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20]"
+                       showFirstLastButtons
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+</section>

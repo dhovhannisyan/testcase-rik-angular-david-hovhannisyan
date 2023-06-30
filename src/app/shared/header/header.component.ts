@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { LayoutService } from 'src/app/servises/layout.service';
+import { LayoutService } from 'src/app/services/layout.service';
 
 
 @Component({

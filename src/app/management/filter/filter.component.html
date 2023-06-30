@@ -1,1 +1,117 @@
-<p>filter works!</p>
+<section class="filter">
+    <h2>Фильтр</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-wrapper">
+            <!-- Login -->
+            <div class="form-field">
+                <label for="login">Логин</label>
+                <mat-form-field appearance="outline">
+                    <input id="login" matInput formControlName="name">
+                    <button type="button" class="clear-btn" matSuffix mat-icon-button aria-label="Clear" (click)="resetField('name')">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path [class.bg-invalid]="(form.get('name').touched || submitted) && form.get('name').invalid" d="M11.9999 1.33331C6.10657 1.33331 1.33325 6.10663 1.33325 12C1.33325 17.8933 6.10657 22.6666 11.9999 22.6666C17.8932 22.6666 22.6665 17.8933 22.6665 12C22.6665 6.10663 17.8932 1.33331 11.9999 1.33331ZM17.3332 15.8266L15.8265 17.3333L11.9999 13.5066L8.17324 17.3333L6.66657 15.8266L10.4932 12L6.66657 8.1733L8.17324 6.66663L11.9999 10.4933L15.8265 6.66663L17.3332 8.1733L13.5066 12L17.3332 15.8266Z" fill="#A2A9B1"/>
+                        </svg>                
+                    </button>
+                    <mat-error *ngIf="(form.get('name').touched || submitted) && form.get('name').hasError('onlyLetters')">Только буквы</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- Email -->
+            <div class="form-field">
+                <label for="email">E-mail</label>
+                <mat-form-field appearance="outline">
+                    <input id="email" matInput formControlName="email">
+                    <button type="button" class="clear-btn" matSuffix mat-icon-button aria-label="Clear" (click)="resetField('email')">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path [class.bg-invalid]="(form.get('email').touched || submitted) && form.get('email').invalid" d="M11.9999 1.33331C6.10657 1.33331 1.33325 6.10663 1.33325 12C1.33325 17.8933 6.10657 22.6666 11.9999 22.6666C17.8932 22.6666 22.6665 17.8933 22.6665 12C22.6665 6.10663 17.8932 1.33331 11.9999 1.33331ZM17.3332 15.8266L15.8265 17.3333L11.9999 13.5066L8.17324 17.3333L6.66657 15.8266L10.4932 12L6.66657 8.1733L8.17324 6.66663L11.9999 10.4933L15.8265 6.66663L17.3332 8.1733L13.5066 12L17.3332 15.8266Z" fill="#A2A9B1"/>
+                        </svg>                
+                    </button>
+                    <mat-error *ngIf="(form.get('email').touched || submitted) && form.get('email').hasError('required')">Обязательное поле</mat-error>
+                    <mat-error *ngIf="(form.get('email').touched || submitted) && form.get('email').hasError('email') && !form.get('email').hasError('required')">Недопустимые символы</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- Phone -->
+            <div class="form-field">
+                <label for="phone">Телефон</label>
+                <mat-form-field appearance="outline">
+                    <input id="phone" matInput formControlName="phone">
+                    <button type="button" class="clear-btn" matSuffix mat-icon-button aria-label="Clear" (click)="resetField('phone')">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path [class.bg-invalid]="(form.get('phone').touched || submitted) && form.get('phone').invalid" d="M11.9999 1.33331C6.10657 1.33331 1.33325 6.10663 1.33325 12C1.33325 17.8933 6.10657 22.6666 11.9999 22.6666C17.8932 22.6666 22.6665 17.8933 22.6665 12C22.6665 6.10663 17.8932 1.33331 11.9999 1.33331ZM17.3332 15.8266L15.8265 17.3333L11.9999 13.5066L8.17324 17.3333L6.66657 15.8266L10.4932 12L6.66657 8.1733L8.17324 6.66663L11.9999 10.4933L15.8265 6.66663L17.3332 8.1733L13.5066 12L17.3332 15.8266Z" fill="#A2A9B1"/>
+                        </svg>                
+                    </button>
+                    <mat-error *ngIf="form.get('phone').hasError('phone')">Некорректный номер</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- Creation Date -->
+            <div class="form-field">
+                <label for="create-date">Дата создания</label>
+                <mat-form-field appearance="outline">
+                    <input id="create-date" formControlName="create_at" matInput [matDatepicker]="createPicker">
+                    <mat-datepicker-toggle matIconSuffix [for]="createPicker">
+                        <svg matDatepickerToggleIcon width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H0V4H4V0ZM10 0H6V4H10V0ZM12 0H16V4H12V0ZM4 6H0V10H4V6ZM6 6H10V10H6V6ZM4 12H0V16H4V12ZM6 12H10V16H6V12ZM16 6H12V10H16V6Z" fill="#A2A9B1"/>
+                        </svg>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #createPicker></mat-datepicker>
+                    <mat-error *ngIf="form.get('create_at').invalid">Обязательное поле</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- Editing Date -->
+            <div class="form-field">
+                <label for="edit-date">Дата изменения</label>
+                <mat-form-field appearance="outline">
+                    <input id="edit-date" formControlName="update_at" matInput [matDatepicker]="editPicker">
+                    <mat-datepicker-toggle matIconSuffix [for]="editPicker">
+                        <svg matDatepickerToggleIcon width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H0V4H4V0ZM10 0H6V4H10V0ZM12 0H16V4H12V0ZM4 6H0V10H4V6ZM6 6H10V10H6V6ZM4 12H0V16H4V12ZM6 12H10V16H6V12ZM16 6H12V10H16V6Z" fill="#A2A9B1"/>
+                        </svg>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #editPicker></mat-datepicker>
+                    <mat-error *ngIf="form.get('update_at').invalid">Невалидный формат даты</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- Role -->
+            <div class="form-field">
+                <label>Роль</label>
+                <mat-form-field appearance="outline">
+                    <mat-select formControlName="is_admin">
+                        <mat-option [value]="false">
+                            Пользователь
+                        </mat-option>
+                        <mat-option [value]="true">
+                            Администратор
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('is_admin').hasError('boolean')">Некорректное значение</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- Status -->
+            <div class="form-field">
+                <label>Статус</label>
+                <mat-form-field appearance="outline">
+                    <mat-select formControlName="status">
+                        <mat-option [value]="USER_STATUS.ACTIVE">
+                            Активен
+                        </mat-option>
+                        <mat-option [value]="USER_STATUS.INACTIVE">
+                            Заблокирован
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('status').hasError('ststus')">Некорректное значение</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div class="actions">
+            <button type="submit" class="apply-btn" mat-raised-button>
+                Применить
+            </button>
+            <button type="button" class="cancle-btn" mat-raised-button (click)="onCloseFilter()">
+                Отмена
+            </button>
+            <button type="button" class="reset-btn" mat-raised-button (click)="resetForm()">
+                Сбросить
+            </button>
+        </div>
+    </form>
+</section>

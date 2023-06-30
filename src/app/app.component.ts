@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { LayoutService } from './servises/layout.service';
+import { LayoutService } from './services/layout.service';
 
 @Component({
   selector: 'app-root',

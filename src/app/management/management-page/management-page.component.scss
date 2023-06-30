@@ -1,0 +1,120 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/breakpoints.scss';
+
+
+:host {
+    display: block;
+}
+
+.back-nav {
+    
+    a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #666F78;
+        font-weight: 700;
+        font-size: 18px;
+
+        @include lg-screen() {
+            font-size: 17px;
+        }
+
+        span {
+            margin-top: 3px;
+            margin-left: 7px;
+        }
+    }
+
+}
+
+h1 {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #282828;
+
+}
+
+.actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    @include lg-screen() {
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .actions-wrapper {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 20px;
+
+        @include on-screen(490px) {
+            grid-template-columns: auto auto auto;
+        }
+    }
+    .action-btn {
+        font-weight: 400;
+        padding: 15px;
+        background-color: $base-color;
+        color: white;
+        text-align: center;
+        font-size: 12px;
+        box-shadow: none;
+        @include on-screen(360px) {
+           font-size: 14px;
+        }
+        @include lg-screen() {
+            flex-direction: row;
+            text-align: left;
+        }
+
+        svg {
+            margin-left: 10px;
+            display: none;
+            @include lg-screen() {
+                display: inline-block;
+            }
+        }
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+        }
+    } 
+
+    .filter-btn-wrapper {
+        padding-top: 20px; 
+        @include lg-screen() {
+            padding-top: 0; 
+        }
+        .filter-btn {
+            box-shadow: none;
+            padding: 15px;
+            font-weight: 400;
+            background-color: lighten(#666F78, 30);
+            color: #666F78;
+            svg {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.filter-wrapper {
+    overflow: hidden;
+}
+
+app-filter {
+    margin-top: -400%;
+    transition: margin-top .5s;
+    @include sm-screen() {
+        margin-top: -100%;
+    }
+    &.open {
+        margin-top: 40px;
+    }
+}

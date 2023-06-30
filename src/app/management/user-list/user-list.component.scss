@@ -1,0 +1,62 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/breakpoints.scss';
+
+
+:host {
+    margin-top: 20px;
+    display: block;
+}
+
+.user-list {
+    background-color: white;
+
+    .selected-users {
+        color: #666F78;
+        text-align: right;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        white-space: nowrap;
+        font-size: 15px;
+        th {
+            background-color: $base-color;
+            color: white;
+            
+            .login {
+                color: white;
+                font-weight: 500;
+            }
+        }
+        .has-ep-icon {
+            margin-left: 28px;
+        }
+        .status-active {
+            color: #25B553;
+            font-size: 15px;
+        }
+        .status-inactive {
+            color: #FF001F;
+            font-size: 15px;
+        }
+    }
+}
+
+mat-checkbox::ng-deep {
+    .mdc-checkbox__background {
+        border: 1px solid #555 !important;
+        border-color: #aaa !important;
+        background-color: white !important;
+    }
+
+    .mdc-checkbox__background svg {
+        color: #092360 !important;
+    }
+}
+
